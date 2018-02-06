@@ -19,81 +19,78 @@ $spreadsheet = new Spreadsheet();
 
 // Set document properties
 $helper->log('Set document properties');
-$spreadsheet->getProperties()->setCreator('Jangwon Seo')
-        ->setLastModifiedBy('Abraham (Jangwon) Seo')
-        ->setTitle('PHPSpreadSheet XLSX Test')
-        ->setSubject('PHPSpreadSheet Invoice')
-        ->setDescription('PHPSpreadSheet Invoice')
-        ->setKeywords('office php invoice')
-        ->setCategory('Invoice');
+$spreadsheet->getProperties()->setCreator('Maarten Balliauw')
+    ->setLastModifiedBy('Maarten Balliauw')
+    ->setTitle('Office 2007 XLSX Test Document')
+    ->setSubject('Office 2007 XLSX Test Document')
+    ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+    ->setKeywords('office 2007 openxml php')
+    ->setCategory('Test result file');
 
 // Create a first sheet, representing sales data
 $helper->log('Add some data');
 $spreadsheet->setActiveSheetIndex(0);
-$spreadsheet->getActiveSheet()->setCellValue('A1', 'Samjung Data Service Co., Ltd.');
-$spreadsheet->getActiveSheet()->setCellValue('A2', '2-6301, 110, Digital-ro 26-gil, Guro-gu, Seoul, Republic of Korea');
-$spreadsheet->getActiveSheet()->setCellValue('A3', 'TEL :+82-2-2029-0130 / FAX :+82-2-544-6008');
-$spreadsheet->getActiveSheet()->setCellValue('A5', 'INVOICE');
+$spreadsheet->getActiveSheet()->setCellValue('B1', 'Invoice');
+$spreadsheet->getActiveSheet()->setCellValue('D1', Date::PHPToExcel(gmmktime(0, 0, 0, date('m'), date('d'), date('Y'))));
+$spreadsheet->getActiveSheet()->getStyle('D1')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_DATE_XLSX15);
+$spreadsheet->getActiveSheet()->setCellValue('E1', '#12566');
 
-$spreadsheet->getActiveSheet()->setCellValue('A8', 'BUYER : ');
-$spreadsheet->getActiveSheet()->setCellValue('A9', 'Twilio Inc. ');
-$spreadsheet->getActiveSheet()->setCellValue('A10', '645 Harrison Street, Third Floor,');
-$spreadsheet->getActiveSheet()->setCellValue('A11', 'San Francisco, CA 94107, USA');
+$spreadsheet->getActiveSheet()->setCellValue('A3', 'Product Id');
+$spreadsheet->getActiveSheet()->setCellValue('B3', 'Description');
+$spreadsheet->getActiveSheet()->setCellValue('C3', 'Price');
+$spreadsheet->getActiveSheet()->setCellValue('D3', 'Amount');
+$spreadsheet->getActiveSheet()->setCellValue('E3', 'Total');
 
-$spreadsheet->getActiveSheet()->setCellValue('G8', 'Invoice No. 20170704');
-$spreadsheet->getActiveSheet()->setCellValue('G9', 'Date : 04. July, 2017');
+$spreadsheet->getActiveSheet()->setCellValue('A4', '1001');
+$spreadsheet->getActiveSheet()->setCellValue('B4', 'PHP for dummies');
+$spreadsheet->getActiveSheet()->setCellValue('C4', '20');
+$spreadsheet->getActiveSheet()->setCellValue('D4', '1');
+$spreadsheet->getActiveSheet()->setCellValue('E4', '=IF(D4<>"",C4*D4,"")');
 
-$spreadsheet->getActiveSheet()->setCellValue('A13', 'Item');
-$spreadsheet->getActiveSheet()->setCellValue('B13', 'Description');
-$spreadsheet->getActiveSheet()->setCellValue('C13', 'Qty');
-$spreadsheet->getActiveSheet()->setCellValue('D13', 'Time');
-$spreadsheet->getActiveSheet()->setCellValue('E13', 'Unit price(USD)');
-$spreadsheet->getActiveSheet()->setCellValue('F13', 'Amount(USD)');
+$spreadsheet->getActiveSheet()->setCellValue('A5', '1012');
+$spreadsheet->getActiveSheet()->setCellValue('B5', 'OpenXML for dummies');
+$spreadsheet->getActiveSheet()->setCellValue('C5', '22');
+$spreadsheet->getActiveSheet()->setCellValue('D5', '2');
+$spreadsheet->getActiveSheet()->setCellValue('E5', '=IF(D5<>"",C5*D5,"")');
 
-$spreadsheet->getActiveSheet()->setCellValue('A14', '1');
-$spreadsheet->getActiveSheet()->setCellValue('B14', 'Virtual Long Number (June 2017)');
-$spreadsheet->getActiveSheet()->setCellValue('C14', '396');
-$spreadsheet->getActiveSheet()->setCellValue('D14', '-');
-$spreadsheet->getActiveSheet()->setCellValue('E14', '1');
-$spreadsheet->getActiveSheet()->setCellValue('F14', '396.00');
+$spreadsheet->getActiveSheet()->setCellValue('E6', '=IF(D6<>"",C6*D6,"")');
+$spreadsheet->getActiveSheet()->setCellValue('E7', '=IF(D7<>"",C7*D7,"")');
+$spreadsheet->getActiveSheet()->setCellValue('E8', '=IF(D8<>"",C8*D8,"")');
+$spreadsheet->getActiveSheet()->setCellValue('E9', '=IF(D9<>"",C9*D9,"")');
 
-$spreadsheet->getActiveSheet()->setCellValue('A15', '2');
-$spreadsheet->getActiveSheet()->setCellValue('B15', 'Voice Inbound (Samjung to Twilio)');
-$spreadsheet->getActiveSheet()->setCellValue('C15', '-');
-$spreadsheet->getActiveSheet()->setCellValue('D15', '81 min');
-$spreadsheet->getActiveSheet()->setCellValue('E15', '0.008');
-$spreadsheet->getActiveSheet()->setCellValue('F15', '0.648');
+$spreadsheet->getActiveSheet()->setCellValue('D11', 'Total excl.:');
+$spreadsheet->getActiveSheet()->setCellValue('E11', '=SUM(E4:E9)');
 
-$spreadsheet->getActiveSheet()->setCellValue('A16', '3');
-$spreadsheet->getActiveSheet()->setCellValue('B16', 'Voice Outbound: Land line (Twilio to Samjung)');
-$spreadsheet->getActiveSheet()->setCellValue('C16', '-');
-$spreadsheet->getActiveSheet()->setCellValue('D16', '0 min');
-$spreadsheet->getActiveSheet()->setCellValue('E16', '0.0153');
-$spreadsheet->getActiveSheet()->setCellValue('F16', '0.0000');
+$spreadsheet->getActiveSheet()->setCellValue('D12', 'VAT:');
+$spreadsheet->getActiveSheet()->setCellValue('E12', '=E11*0.21');
 
-$spreadsheet->getActiveSheet()->setCellValue('A17', '4');
-$spreadsheet->getActiveSheet()->setCellValue('B17', 'Voice Outbound: Mobile (Twilio to Samjung)');
-$spreadsheet->getActiveSheet()->setCellValue('C17', '-');
-$spreadsheet->getActiveSheet()->setCellValue('D17', '0 dsec');
-$spreadsheet->getActiveSheet()->setCellValue('E17', '0.009');
-$spreadsheet->getActiveSheet()->setCellValue('F17', '0.000');
-
-$spreadsheet->getActiveSheet()->setCellValue('G28', 'TOTAL AMOUNT');
-$spreadsheet->getActiveSheet()->setCellValue('G29', 'US$396.648');
-
+$spreadsheet->getActiveSheet()->setCellValue('D13', 'Total incl.:');
+$spreadsheet->getActiveSheet()->setCellValue('E13', '=E11+E12');
 
 // Add comment
 $helper->log('Add comments');
 
-$spreadsheet->getActiveSheet()->getComment('E11')->setAuthor('Jangwon Seo');
-$spreadsheet->getActiveSheet()->getComment('E11')->getText()->createTextRun('0.008 USD per minute');
+$spreadsheet->getActiveSheet()->getComment('E11')->setAuthor('PhpSpreadsheet');
+$commentRichText = $spreadsheet->getActiveSheet()->getComment('E11')->getText()->createTextRun('PhpSpreadsheet:');
+$commentRichText->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getComment('E11')->getText()->createTextRun("\r\n");
+$spreadsheet->getActiveSheet()->getComment('E11')->getText()->createTextRun('Total amount on the current invoice, excluding VAT.');
 
-$spreadsheet->getActiveSheet()->getComment('E12')->setAuthor('Jangwon Seo');
-$spreadsheet->getActiveSheet()->getComment('E12')->getText()->createTextRun('0.0153 USD per minute');
+$spreadsheet->getActiveSheet()->getComment('E12')->setAuthor('PhpSpreadsheet');
+$commentRichText = $spreadsheet->getActiveSheet()->getComment('E12')->getText()->createTextRun('PhpSpreadsheet:');
+$commentRichText->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getComment('E12')->getText()->createTextRun("\r\n");
+$spreadsheet->getActiveSheet()->getComment('E12')->getText()->createTextRun('Total amount of VAT on the current invoice.');
 
-$spreadsheet->getActiveSheet()->getComment('E13')->setAuthor('Jangwon Seo');
-$spreadsheet->getActiveSheet()->getComment('E13')->getText()->createTextRun('0.009 USD per 10 sec (dsec)');
-
+$spreadsheet->getActiveSheet()->getComment('E13')->setAuthor('PhpSpreadsheet');
+$commentRichText = $spreadsheet->getActiveSheet()->getComment('E13')->getText()->createTextRun('PhpSpreadsheet:');
+$commentRichText->getFont()->setBold(true);
+$spreadsheet->getActiveSheet()->getComment('E13')->getText()->createTextRun("\r\n");
+$spreadsheet->getActiveSheet()->getComment('E13')->getText()->createTextRun('Total amount on the current invoice, including VAT.');
+$spreadsheet->getActiveSheet()->getComment('E13')->setWidth('100pt');
+$spreadsheet->getActiveSheet()->getComment('E13')->setHeight('100pt');
+$spreadsheet->getActiveSheet()->getComment('E13')->setMarginLeft('150pt');
+$spreadsheet->getActiveSheet()->getComment('E13')->getFillColor()->setRGB('EEEEEE');
 
 // Add rich-text string
 $helper->log('Add rich-text string');
@@ -111,16 +108,13 @@ $spreadsheet->getActiveSheet()->getCell('A18')->setValue($richText);
 
 // Merge cells
 $helper->log('Merge cells');
-$spreadsheet->getActiveSheet()->mergeCells('A1:G1');
-$spreadsheet->getActiveSheet()->mergeCells('A2:G2');
-$spreadsheet->getActiveSheet()->mergeCells('A3:G3');
-$spreadsheet->getActiveSheet()->mergeCells('A5:G5');
-
+$spreadsheet->getActiveSheet()->mergeCells('A18:E22');
+$spreadsheet->getActiveSheet()->mergeCells('A28:B28'); // Just to test...
+$spreadsheet->getActiveSheet()->unmergeCells('A28:B28'); // Just to test...
 // Protect cells
 $helper->log('Protect cells');
 $spreadsheet->getActiveSheet()->getProtection()->setSheet(true); // Needs to be set to true in order to enable any worksheet protection!
-$spreadsheet->getActiveSheet()->protectCells('A13:G18', 'PhpSpreadsheet');  // 데이터 부분만
-// $spreadsheet->getActiveSheet()->protectCells('A1:G29', 'PhpSpreadsheet'); // 전체
+$spreadsheet->getActiveSheet()->protectCells('A3:E13', 'PhpSpreadsheet');
 
 // Set cell number formats
 $helper->log('Set cell number formats');
